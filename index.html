@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Study Buddy</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="app">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">📚</div>
+      <div>
+        <h1>AI Study Buddy</h1>
+        <p>Summarize notes · Generate quizzes · Explain concepts</p>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('summarize')">📝 Summarize Notes</button>
+      <button class="tab" onclick="switchTab('quiz')">🧠 Generate Quiz</button>
+      <button class="tab" onclick="switchTab('explain')">💡 Explain Concept</button>
+    </div>
+
+    <!-- ======================== SUMMARIZE SECTION ======================== -->
+    <div class="section active" id="summarize">
+      <div class="card">
+        <div class="info-box">Paste your notes below and get a clean summary with key points.</div>
+        <div class="field">
+          <label class="label">Your Notes</label>
+          <textarea id="notes-input" placeholder="Paste your notes here..."></textarea>
+        </div>
+        <div class="field">
+          <label class="label">Subject / Topic (optional)</label>
+          <input type="text" id="subject-input" placeholder="e.g. Biology Chapter 3, World War 2">
+        </div>
+        <button class="btn" id="summarize-btn" onclick="summarizeNotes()">
+          <span id="sum-spinner" class="spinner" style="display:none"></span>
+          Summarize
+        </button>
+      </div>
+
+      <div class="card" id="summary-output-card" style="display:none">
+        <div class="card-top">
+          <span class="card-title">Summary</span>
+          <span class="badge" id="sum-badge">Done</span>
+        </div>
+        <div class="output" id="summary-output"></div>
+      </div>
+    </div>
+
+    <!-- ======================== QUIZ SECTION ======================== -->
+    <div class="section" id="quiz">
+      <div class="card">
+        <div class="info-box">Enter a topic and get instant multiple-choice questions to test yourself.</div>
+        <div class="row">
+          <div class="flex-1 field">
+            <label class="label">Topic</label>
+            <input type="text" id="quiz-topic" placeholder="e.g. Photosynthesis, Python Loops, World War 2">
+          </div>
+          <div class="field" style="min-width:130px">
+            <label class="label">No. of Questions</label>
+            <select id="quiz-count">
+              <option value="3">3 Questions</option>
+              <option value="5" selected>5 Questions</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn" id="quiz-btn" onclick="generateQuiz()">
+          <span id="quiz-spinner" class="spinner" style="display:none"></span>
+          Generate Quiz
+        </button>
+      </div>
+
+      <div id="quiz-area"></div>
+
+      <div id="quiz-result" class="card" style="display:none">
+        <p class="card-title">Quiz Complete! 🎉</p>
+        <p id="quiz-score-text" class="muted-text"></p>
+        <button class="btn btn-outline" style="margin-top:12px" onclick="generateQuiz()">Try Again</button>
+      </div>
+    </div>
+
+    <!-- ======================== EXPLAIN SECTION ======================== -->
+    <div class="section" id="explain">
+      <div class="card">
+        <div class="info-box">Enter any concept and get a simple, easy-to-understand explanation with an analogy.</div>
+        <div class="field">
+          <label class="label">Concept to Explain</label>
+          <input type="text" id="concept-input" placeholder="e.g. Recursion, Mitosis, Newton's 3rd Law, SQL Joins">
+        </div>
+        <div class="field">
+          <label class="label">Explain it like I'm a...</label>
+          <select id="explain-level">
+            <option value="10-year-old">10-year-old</option>
+            <option value="high school student" selected>High school student</option>
+            <option value="college student">College student</option>
+          </select>
+        </div>
+        <button class="btn" id="explain-btn" onclick="explainConcept()">
+          <span id="exp-spinner" class="spinner" style="display:none"></span>
+          Explain
+        </button>
+      </div>
+
+      <div class="card" id="explain-output-card" style="display:none">
+        <div class="card-top">
+          <span class="card-title" id="explain-title">Explanation</span>
+        </div>
+        <div class="output" id="explain-output"></div>
+      </div>
+    </div>
+
+  </div><!-- /app -->
+
+  <script src="app.js"></script>
+</body>
+</html>
